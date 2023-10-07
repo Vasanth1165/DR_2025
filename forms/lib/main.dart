@@ -1,131 +1,122 @@
 
-
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:forms/radio_buttons.dart';
+import 'package:forms/register%20page.dart';
 void main(){
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyForms(),
+      home: MyRegister(),
     );
   }
 }
-
+enum SigningCharacter{male,female}
 class MyForms extends StatefulWidget {
   const MyForms({super.key});
 
   @override
   State<MyForms> createState() => _MyFormsState();
 }
-
 class _MyFormsState extends State<MyForms> {
-  final _formkey =GlobalKey<FormState>();
-  final _email=TextEditingController();
-  final _pass=TextEditingController();
-  bool _isvisble=true;
+  double slider=1;
+  final _name=TextEditingController();
+  final _roll=TextEditingController();
+  final _key=GlobalKey<FormState>();
+  SigningCharacter? _gender;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+
     return Scaffold(
       appBar: AppBar(),
       body: Form(
-        key: _formkey,
+        key: _key,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextFormField(
-                controller: _email,
-                validator: (val)=> val!.length==0 ? "Enter email address":null,
+            TextFormField(
+              controller: _name,
+              decoration: InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: "Name"
               ),
+              validator: (val)=> val!.length==0 ? "Enter name" : null,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextFormField(
-                controller: _pass,
-                obscureText: _isvisble,
-                validator: (val)=> val!.isEmpty ? "Enter password": null,
-                decoration: InputDecoration(
-                  suffixIcon: _isvisble? IconButton(onPressed: (){
-                    setState(() {
-                      _isvisble=false;
-                    });
-                  }, icon: Icon(Icons.remove_red_eye)):IconButton(onPressed: (){
-                    setState(() {
-                      _isvisble=true;
-                    });
-                  }, icon: Icon(Icons.remove_circle_outlined)),
+            TextFormField(
+              controller: _roll,
+              decoration: InputDecoration(
+                icon: Icon(
+                  Icons.confirmation_number_rounded
                 ),
+                hintText: "Roll No"
               ),
+              validator: (val){
+                if(val!.length==0){
+                  return "Enter Roll Number";
+                }
+                return null;
+              },
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             ElevatedButton(onPressed: (){
-              if(_formkey.currentState!.validate()){
-                print("true!!!!!!!!!!!!!!!!!!!!!!");
+              if(_key.currentState!.validate()){
+                // print(_roll.text);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> MyDisplay(name: _name.text.trim(), roll: _roll.text.trim())));
               }
-            }, child: Text("Submit"))
+            }, child: Text("Submit")),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                RadioMenuButton<SigningCharacter>(
+
+                    value: SigningCharacter.male, groupValue: _gender, onChanged: (val){
+                  setState(() {
+                    _gender=val;
+                  });
+                }, child: Text("Male")),
+                RadioMenuButton<SigningCharacter>(value: SigningCharacter.female, groupValue: _gender, onChanged: (val){
+                  setState(() {
+                    _gender=val;
+                  });
+                }, child: Text("Female")),
+              ],
+            )
           ],
         ),
       ),
     );
   }
 }
-// Padding(
-//   padding: const EdgeInsets.symmetric(horizontal: 30),
-//   child: TextField(
-//     decoration: InputDecoration(
-//       enabledBorder: OutlineInputBorder(
-//         borderRadius: BorderRadius.circular(10)
-//       ),
-//       disabledBorder: OutlineInputBorder(
-//         borderRadius: BorderRadius.circular(10),
-//       ),
-//       focusedBorder: OutlineInputBorder(
-//         borderSide: BorderSide(
-//           color: Colors.green
-//         ),
-//         borderRadius: BorderRadius.circular(10),
-//       ),
-//       errorBorder: OutlineInputBorder(
-//         borderRadius: BorderRadius.circular(10),
-//       ),
-//       errorText: "all",
-//       contentPadding: EdgeInsets.symmetric(horizontal: 30),
-//       // prefix: Text("Name"),
-//       // prefixIcon: Icon(
-//       //   Icons.mail,
-//       //   color: Colors.red,
-//       // ),
-//       // prefixIconColor: Colors.orange,
-//       // prefixText: "Email",
-//       // suffixIcon: Icon(
-//       //   Icons.remove_red_eye_outlined
-//       // ),
-//       // suffixText: "name"
-//       hintText: "email",
-//       helperText: "Email",
-//       labelText: "Email address",
-//       icon: Icon(
-//         Icons.email
-//       ),
-//       iconColor: Colors.red,
-//       // counterText: "Email",
-//       // counter: Offstage()
-//     ),
-//     maxLength: 1,
-//     // maxLines: 2,
-//   ),
 
+class MyDisplay extends StatelessWidget {
+  final String name;
+  final String roll;
+  const MyDisplay({super.key,required this.name,required this.roll});
 
-// )
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Name : $name",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+            SizedBox(
+              height: 10,
+            ),
+            Text("Roll No : $roll",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
+          ],
+        ),
+      ),
+    );
+  }
+}

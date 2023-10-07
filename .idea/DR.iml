@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/expandedwidgets/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/expandedwidgets/build" />
+      <excludeFolder url="file://$MODULE_DIR$/expandedwidgets/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/firebase/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/firebase/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/firebase/build" />
+      <excludeFolder url="file://$MODULE_DIR$/nav/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/nav/build" />
+      <excludeFolder url="file://$MODULE_DIR$/nav/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/body/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/body/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/body/build" />
+      <excludeFolder url="file://$MODULE_DIR$/calc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/calc/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/calc/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/builders/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/builders/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/builders/build" />
+      <excludeFolder url="file://$MODULE_DIR$/card/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/card/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/card/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bottomnavbar/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bottomnavbar/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bottomnavbar/build" />
+      <excludeFolder url="file://$MODULE_DIR$/buttons/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/buttons/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/buttons/build" />
+      <excludeFolder url="file://$MODULE_DIR$/forms/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/forms/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/forms/build" />
+      <excludeFolder url="file://$MODULE_DIR$/state/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/state/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/state/build" />
+      <excludeFolder url="file://$MODULE_DIR$/page/build" />
+      <excludeFolder url="file://$MODULE_DIR$/page/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/page/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/gridview/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/gridview/build" />
+      <excludeFolder url="file://$MODULE_DIR$/gridview/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/tiles/build" />
+      <excludeFolder url="file://$MODULE_DIR$/tiles/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/tiles/.dart_tool" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

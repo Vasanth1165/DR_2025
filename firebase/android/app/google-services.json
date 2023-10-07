@@ -1,22 +1,22 @@
 {
   "project_info": {
-    "project_number": "216045570547",
-    "firebase_url": "https://fir-ae2d5-default-rtdb.firebaseio.com",
-    "project_id": "fir-ae2d5",
-    "storage_bucket": "fir-ae2d5.appspot.com"
+    "project_number": "367461261031",
+    "firebase_url": "https://drfire-57f44-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "drfire-57f44",
+    "storage_bucket": "drfire-57f44.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:216045570547:android:6e7bf389c106cec2552a86",
+        "mobilesdk_app_id": "1:367461261031:android:e127a883fc8f96e4ce8c42",
         "android_client_info": {
-          "package_name": "com.vasanth.firebase"
+          "package_name": "com.vasanth.drfire"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB8ACXDdJnbT5K26Nn0Zc57veCeY2hGRzk"
+          "current_key": "AIzaSyCM3WSCpYAUv6PU3MN0ilL9KDBNuZgg6KQ"
         }
       ],
       "services": {

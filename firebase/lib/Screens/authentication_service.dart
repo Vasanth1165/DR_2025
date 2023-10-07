@@ -1,8 +1,8 @@
 
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 class Authentication{
   final FirebaseAuth _auth=FirebaseAuth.instance;
   final FirebaseFirestore db=FirebaseFirestore.instance;
@@ -19,23 +19,33 @@ class Authentication{
 
   Future register(String email,String pass)async{
     try{
-      final res=await _auth.createUserWithEmailAndPassword(email: email, password: pass).then((value) => addUser(email.trim()));
+      final res=await _auth.createUserWithEmailAndPassword(email: email, password: pass);
+      // ignore: unrelated_type_equality_checks
+      if(res.toString()!=0){
+        addUser(res.user!.uid,email);
+      }
     }catch(err){
       throw Exception(err);
     }
   }
 
-  Future phone(String phoneNumber)async{
+  Future addUser(String uid,String email)async{
+    await FirebaseFirestore.instance.collection('Users').doc(uid).set({
+      "email":email,
+      "uid": uid,
+      "todo":[],
+      "userID":email.substring(0,(email.length)-10)
+    });
+    final res=  await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+    print(jsonDecode(res.toString()));
+  }
+
+  Future addTodo()async{
     try{
-      await _auth.signInWithPhoneNumber(phoneNumber);
+      final res=await  FirebaseFirestore.instance.collection('Users').doc('EM8G8bJO6dPnhQQ9MLlWa98ZYFA2').get();
+      print(res);
     }catch(err){
       throw Exception(err);
     }
-  }
-  Future addUser(String email)async{
-    await FirebaseFirestore.instance.collection('Users').add({
-      "email":email,
-      "userID":email.substring((email.length)-10)
-    });
   }
 }
