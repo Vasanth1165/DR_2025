@@ -1,6 +1,9 @@
 
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/Screens/Auth/signup_page.dart';
-import 'package:firebase/Screens/profile.dart';
+import 'package:firebase/Screens/addtodo.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +33,11 @@ class MyPaint extends StatefulWidget {
 }
 
 class _MyPaintState extends State<MyPaint> {
+  Future data()async{
+    final DocumentSnapshot db=FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid) as DocumentSnapshot<Object?>;
+    print(db.data());
+    print(jsonDecode(db.data().toString()).email);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,48 +59,68 @@ class _MyPaintState extends State<MyPaint> {
         heightFactor: 2.5,
         child: FloatingActionButton(
           backgroundColor: Colors.deepPurpleAccent,
-          onPressed: (){},child: const Center(child: Icon(Icons.qr_code_scanner_outlined)),),
+          onPressed: (){
+            data();
+            // Authentication().upload();
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddTodo()));
+          },child: const Center(child: Icon(Icons.qr_code_scanner_outlined)),),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> MyProfile()));
-            },
-            child: SizedBox(
-              height: MediaQuery.sizeOf(context).height/3,
-              width: MediaQuery.of(context).size.width/2,
-              child: CustomPaint(
-                painter: CardPaint(),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Hello",style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold
-                        ),)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 200,
-          ),
-          CustomPaint(
-            size: Size(MediaQuery.sizeOf(context).width,80),
-            painter: Curve(),
-          )
-        ],
-      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("Users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots(), 
+        builder:(context, snapshot){
+          if(snapshot.hasData){
+            return  ListTile(
+              title: Text(snapshot.data.toString()),
+            );
+          }
+          else{
+            return const Center(child: CircularProgressIndicator());
+          }
+      },)
+      
+      // Column(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     GestureDetector(
+      //       onTap: (){
+      //         Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyProfile()));
+      //       },
+      //       child: SizedBox(
+      //         height: MediaQuery.sizeOf(context).height/3,
+      //         width: MediaQuery.of(context).size.width/2,
+      //         child: CustomPaint(
+      //           painter: CardPaint(),
+      //           child: const Padding(
+      //             padding: EdgeInsets.all(8.0),
+      //             child: Padding(
+      //               padding: EdgeInsets.all(20.0),
+      //               child: Column(
+      //                 mainAxisAlignment: MainAxisAlignment.center,
+      //                 children: [
+      //                   Text("Hello",style: TextStyle(
+      //                     color: Colors.white,
+      //                     fontSize: 24,
+      //                     fontWeight: FontWeight.bold
+      //                   ),)
+      //                 ],
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //     const SizedBox(
+      //       height: 200,
+      //     ),
+          // CustomPaint(
+          //   size: Size(MediaQuery.sizeOf(context).width,80),
+          //   painter: Curve(),
+          // )
+      //   ],
+      // ),
+
     );
   }
 }

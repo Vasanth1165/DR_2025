@@ -1,8 +1,6 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:forms/radio_buttons.dart';
-import 'package:forms/register%20page.dart';
+import 'package:forms/dropdown.dart';
 void main(){
   runApp(const MyApp());
 }
@@ -12,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyRegister(),
+      home: DropDown(),
     );
   }
 }
@@ -40,28 +38,28 @@ class _MyFormsState extends State<MyForms> {
           children: [
             TextFormField(
               controller: _name,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 icon: Icon(Icons.person),
                 hintText: "Name"
               ),
-              validator: (val)=> val!.length==0 ? "Enter name" : null,
+              validator: (val)=> val!.isEmpty ? "Enter name" : null,
             ),
             TextFormField(
               controller: _roll,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 icon: Icon(
                   Icons.confirmation_number_rounded
                 ),
                 hintText: "Roll No"
               ),
               validator: (val){
-                if(val!.length==0){
+                if(val!.isEmpty){
                   return "Enter Roll Number";
                 }
                 return null;
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ElevatedButton(onPressed: (){
@@ -69,8 +67,8 @@ class _MyFormsState extends State<MyForms> {
                 // print(_roll.text);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MyDisplay(name: _name.text.trim(), roll: _roll.text.trim())));
               }
-            }, child: Text("Submit")),
-            SizedBox(
+            }, child: const Text("Submit")),
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -81,12 +79,12 @@ class _MyFormsState extends State<MyForms> {
                   setState(() {
                     _gender=val;
                   });
-                }, child: Text("Male")),
+                }, child: const Text("Male")),
                 RadioMenuButton<SigningCharacter>(value: SigningCharacter.female, groupValue: _gender, onChanged: (val){
                   setState(() {
                     _gender=val;
                   });
-                }, child: Text("Female")),
+                }, child: const Text("Female")),
               ],
             )
           ],
@@ -109,11 +107,11 @@ class MyDisplay extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Name : $name",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-            SizedBox(
+            Text("Name : $name",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+            const SizedBox(
               height: 10,
             ),
-            Text("Roll No : $roll",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
+            Text("Roll No : $roll",style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
           ],
         ),
       ),

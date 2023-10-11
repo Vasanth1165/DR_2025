@@ -1,11 +1,15 @@
 
+
+
+
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 class Authentication{
   final FirebaseAuth _auth=FirebaseAuth.instance;
-  final FirebaseFirestore db=FirebaseFirestore.instance;
+  final db=FirebaseFirestore.instance.collection("users");
 
   Future signUpAun() async{
     try{
@@ -36,14 +40,29 @@ class Authentication{
       "todo":[],
       "userID":email.substring(0,(email.length)-10)
     });
-    final res=  await FirebaseFirestore.instance.collection('Users').doc(uid).get();
-    print(jsonDecode(res.toString()));
+    try{
+      final DocumentSnapshot res=await FirebaseFirestore.instance.collection("Users").doc(uid).get();
+      print(res.data());
+    }catch(err){
+      
+    }
+  }
+  Future todo(String title,String task)async{
+    try{
+      await  db.doc(FirebaseAuth.instance.currentUser!.uid).update({
+        "todo": title
+      });
+    }catch(err){
+      throw Exception(err);
+    }
   }
 
-  Future addTodo()async{
+  Future upload() async{
+    final ref=FirebaseStorage.instance.ref().delete();
     try{
-      final res=await  FirebaseFirestore.instance.collection('Users').doc('EM8G8bJO6dPnhQQ9MLlWa98ZYFA2').get();
-      print(res);
+      ref.then((value){
+        
+      }).onError((error, stackTrace){} );
     }catch(err){
       throw Exception(err);
     }

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:page/expanded.dart';
-import 'package:page/views.dart';
+
 
 void main(){
   runApp(MyApp());

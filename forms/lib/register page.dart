@@ -51,12 +51,14 @@ class _MyRegisterState extends State<MyRegister> {
             SizedBox(
               height: 20,
             ),
+
             ElevatedButton(onPressed: (){
               if( key.currentState!.validate()){
                 print("${name.text} ${mail.text} ${roll.text}");
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> RegistedStudent(name: name.text, mail: mail.text, roll: roll.text)));
               }
-            }, child: Text("Register"))
+            }, child: Text("Register")),
+
           ],
         ),
       ),
